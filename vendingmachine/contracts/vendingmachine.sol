@@ -1,6 +1,6 @@
 // contracts/Box.sol
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity >=0.8.2 <0.9.0;
 
 /*
 What is a VendingMachine? What are the functions of this VendingMachine?
