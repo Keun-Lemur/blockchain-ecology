@@ -33,7 +33,7 @@ contract VendingMachine {
     }
 
     function purchase(uint amount) public payable {
-        require(cokeBalance[address(this)] >= amount * 2 ether, "Not enough coke");
+        require(cokeBalance[address(this)] >= amount * 2 ether, "You must pay at least 2 ehter per coke");
         cokeBalance[msg.sender] += amount; // buyer's balance
         cokeBalance[address(this)] -= amount; // owner's balance
     }
