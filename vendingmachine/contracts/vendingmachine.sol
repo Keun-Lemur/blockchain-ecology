@@ -11,6 +11,7 @@ Functions:
 State variables:
 1. owner
 2. balance
+3. amount
 */
 
 
@@ -33,7 +34,8 @@ contract VendingMachine {
     }
 
     function purchase(uint amount) public payable {
-        require(cokeBalance[address(this)] >= amount * 2 ether, "You must pay at least 2 ehter per coke");
+        require(msg.value >= amount * 2 ether, "You must pay at least 2 ether per coke");
+        require(cokeBalance[address(this)] >= amount, "Not enough coke in stock to fulfill purchase request");
         cokeBalance[msg.sender] += amount; // buyer's balance
         cokeBalance[address(this)] -= amount; // owner's balance
     }
