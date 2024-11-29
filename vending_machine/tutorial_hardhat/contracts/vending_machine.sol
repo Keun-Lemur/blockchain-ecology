@@ -16,6 +16,7 @@ State variables:
 
 
 contract VendingMachine {
+    event Purchase (address indexed purchaser, uint256 amount);
     address public owner; // The owner of the contract (coke vending machine)
     mapping(address => uint) public cokeBalance; // The balance of the vending machine
 
@@ -29,6 +30,7 @@ contract VendingMachine {
         require(cokeBalance[address(this)] >= amount, "Not enough coke in stock to fulfill purchase request");
         cokeBalance[msg.sender] += amount; // buyer's balance
         cokeBalance[address(this)] -= amount; // owner's balance
+        emit Purchase(msg.sender, amount);
     }
 
     function getVendingMachineBalance() public view returns(uint) {
