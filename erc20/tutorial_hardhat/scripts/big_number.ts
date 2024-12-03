@@ -1,4 +1,5 @@
 import { ethers } from "hardhat";
+const BN = require("bn.js");
 
 const decimal = 10 ** 18;
 const exampleNumber = 100000 * decimal;
@@ -11,7 +12,7 @@ function noExponents(_number: number) {
   var z = "",
     sign = _number < 0 ? "-" : "",
     str = data[0].replace(".", ""),
-    mag = Number(data[1]) + 1; /*from w w  w.  ja v a  2  s . c  o  m*/
+    mag = Number(data[1]) + 1;
 
   if (mag < 0) {
     z = sign + "0.";
@@ -22,23 +23,25 @@ function noExponents(_number: number) {
   while (mag--) z += "0";
   return str + z;
 }
+
 function getBigNumberEx() {
   console.log("exampleNumber with Exponents >>", exampleNumber);
 
-  const noExponentsExample = ethers.BigNumber.from(
-    noExponents(exampleNumber)
-  ).toString();
-  console.log("exampleNumber toString : ", noExponentsExample);
-  const noExponentsExample2 = ethers.BigNumber.from(
-    noExponents(exampleNumber2)
-  ).toString();
-  console.log("noExponentsExample2 toString : ", noExponentsExample2);
+  // Use new BN(value) instead of BN.from()
+  const noExponentsExample = new BN(noExponents(exampleNumber));
+  console.log("exampleNumber toString : ", noExponentsExample.toString());
 
-  const addResult = ethers.BigNumber.from(noExponentsExample).add(
-    ethers.BigNumber.from(noExponentsExample2)
+  const noExponentsExample2 = new BN(noExponents(exampleNumber2));
+  console.log(
+    "noExponentsExample2 toString : ",
+    noExponentsExample2.toString()
   );
-  console.log("addResult : ", addResult);
-  const addDecimal = ethers.utils.parseUnits(addResult.toString(), 18);
+
+  const addResult = noExponentsExample.add(noExponentsExample2);
+  console.log("addResult : ", addResult.toString());
+
+  // If you want to work with units, you can use ethers utils to parse it
+  const addDecimal = ethers.parseUnits(addResult.toString(), 18);
   console.log("addDecimal >>", addDecimal);
 }
 
