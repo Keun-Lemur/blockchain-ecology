@@ -41,10 +41,12 @@
  * https://trufflesuite.com/docs/truffle/getting-started/using-the-truffle-dashboard/
  */
 
-// require('dotenv').config();
+require("dotenv").config();
 // const { MNEMONIC, PROJECT_ID } = process.env;
 
-// const HDWalletProvider = require('@truffle/hdwallet-provider');
+const HDWalletProvider = require("@truffle/hdwallet-provider");
+
+const privateKeys = [process.env.PRIVATE_KEY];
 
 module.exports = {
   /**
@@ -64,11 +66,72 @@ module.exports = {
     // tab if you use this network and you must also set the `host`, `port` and `network_id`
     // options below to some value.
     //
-    // development: {
-    //  host: "127.0.0.1",     // Localhost (default: none)
-    //  port: 8545,            // Standard Ethereum port (default: none)
-    //  network_id: "*",       // Any network (default: none)
-    // },
+    development: {
+      host: "127.0.0.1", // Localhost (default: none)
+      port: 9545, // Standard Ethereum port (default: none)
+      network_id: "*", // Any network (default: none)
+    },
+    ganache: {
+      host: "127.0.0.1",
+      port: 7545,
+      network_id: "*",
+    },
+    goerli: {
+      provider: () =>
+        new HDWalletProvider(
+          [process.env.PRIVATE_KEY], // 배열 형태로 전달
+          process.env.RPC_URL // Infura, Alchemy 또는 다른 RPC URL
+        ),
+      network_id: "5", // Goerli 네트워크 ID
+    },
+
+    sepolia: {
+      provider: () =>
+        new HDWalletProvider(
+          [
+            "0x877bc6aa1d35312cb300eebbc79b3d802cb6f991670810e3d01983691b60568a",
+          ], // 환경 변수에서 개인 키 가져오기
+          `https://sepolia.infura.io/v3/b7e0d791d87f4a5bacf1807f60b80991` // Infura Sepolia URL
+        ),
+      network_id: 11155111, // Sepolia 네트워크 ID
+      // gas: 5500000, // 최대 가스 한도
+      // confirmations: 2, // 배포 확인 대기
+      // timeoutBlocks: 200, // 배포 타임아웃
+      // skipDryRun: true, // Dry run 스킵
+    },
+
+    linea: {
+      provider: () =>
+        new HDWalletProvider(
+          [
+            "0x877bc6aa1d35312cb300eebbc79b3d802cb6f991670810e3d01983691b60568a",
+          ], // 환경 변수에서 개인 키 가져오기
+          `https://linea-sepolia.infura.io/v3/b7e0d791d87f4a5bacf1807f60b80991`,
+          0 // Infura Sepolia URL
+        ),
+      network_id: 59144, // Sepolia 네트워크 ID
+      // gas: 5500000, // 최대 가스 한도
+      // confirmations: 2, // 배포 확인 대기
+      timeoutBlocks: 200, // 배포 타임아웃
+      // skipDryRun: true, // Dry run 스킵
+    },
+
+    ethsepolia: {
+      provider: () =>
+        new HDWalletProvider(
+          [
+            "0x877bc6aa1d35312cb300eebbc79b3d802cb6f991670810e3d01983691b60568a",
+          ], // 환경 변수에서 개인 키 가져오기
+          "https://eth-sepolia.g.alchemy.com/v2/K2rwCMG8VK29ZGlnU7WPN3qczr0MmBVW",
+          0 // Infura Sepolia URL
+        ),
+      network_id: 11155111, // Sepolia 네트워크 ID
+      // gas: 5500000, // 최대 가스 한도
+      // confirmations: 2, // 배포 확인 대기
+      timeoutBlocks: 200, // 배포 타임아웃
+      // skipDryRun: true, // Dry run 스킵
+    },
+
     //
     // An additional network, but with some advanced options…
     // advanced: {
@@ -83,11 +146,15 @@ module.exports = {
     // Useful for deploying to a public network.
     // Note: It's important to wrap the provider as a function to ensure truffle uses a new provider every time.
     // goerli: {
-    //   provider: () => new HDWalletProvider(MNEMONIC, `https://goerli.infura.io/v3/${PROJECT_ID}`),
-    //   network_id: 5,       // Goerli's id
-    //   confirmations: 2,    // # of confirmations to wait between deployments. (default: 0)
-    //   timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
-    //   skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
+    //   provider: () =>
+    //     new HDWalletProvider(
+    //       MNEMONIC,
+    //       `https://goerli.infura.io/v3/${PROJECT_ID}`
+    //     ),
+    //   network_id: 5, // Goerli's id
+    //   confirmations: 2, // # of confirmations to wait between deployments. (default: 0)
+    //   timeoutBlocks: 200, // # of blocks before a deployment times out  (minimum/default: 50)
+    //   skipDryRun: true, // Skip dry run before migrations? (default: false for public nets )
     // },
     //
     // Useful for private networks
@@ -106,7 +173,7 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-      version: "0.8.21",      // Fetch exact version from solc-bin (default: truffle's version)
+      version: "0.8.21", // Fetch exact version from solc-bin (default: truffle's version)
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
       // settings: {          // See the solidity docs for advice about optimization and evmVersion
       //  optimizer: {
@@ -115,7 +182,7 @@ module.exports = {
       //  },
       //  evmVersion: "byzantium"
       // }
-    }
+    },
   },
 
   // Truffle DB is currently disabled by default; to enable it, change enabled:
