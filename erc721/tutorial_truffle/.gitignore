@@ -1,24 +1,29 @@
-# Node modules
 node_modules
-
-# Environment variables
 .env
-
-# Coverage files
-coverage/
+coverage
 coverage.json
-
-# Typechain files
-typechain/
-typechain-types/
+typechain
+typechain-types
 
 # Hardhat files
-cache/
-artifacts/
+cache
+artifacts
 
-# Truffle files
-build/
-build/contracts/
+node_modules
+.env
+coverage
+coverage.json
+typechain
+typechain-types
+#Truffle files
+build
+build/contracts
+node_modules
 
-# macOS system files
+# Hardhat files
+cache
+artifacts
 .DS_Store
+
+
+
