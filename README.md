@@ -1,1 +1,1 @@
-# smartcontract101
+# blockchain-ecology
