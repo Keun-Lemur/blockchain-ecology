@@ -76,14 +76,14 @@ module.exports = {
       port: 7545,
       network_id: "*",
     },
-    goerli: {
-      provider: () =>
-        new HDWalletProvider(
-          [process.env.PRIVATE_KEY], // 배열 형태로 전달
-          process.env.RPC_URL // Infura, Alchemy 또는 다른 RPC URL
-        ),
-      network_id: "5", // Goerli 네트워크 ID
-    },
+    // goerli: {
+    //   provider: () =>
+    //     new HDWalletProvider(
+    //       [process.env.PRIVATE_KEY], // 배열 형태로 전달
+    //       process.env.RPC_URL // Infura, Alchemy 또는 다른 RPC URL
+    //     ),
+    //   network_id: "5", // Goerli 네트워크 ID
+    // },
 
     sepolia: {
       provider: () =>
@@ -123,9 +123,25 @@ module.exports = {
             "0x877bc6aa1d35312cb300eebbc79b3d802cb6f991670810e3d01983691b60568a",
           ], // 환경 변수에서 개인 키 가져오기
           "https://eth-sepolia.g.alchemy.com/v2/K2rwCMG8VK29ZGlnU7WPN3qczr0MmBVW",
-          0 // Infura Sepolia URL
+          0 // alchemy Sepolia URL
         ),
       network_id: 11155111, // Sepolia 네트워크 ID
+      // gas: 5500000, // 최대 가스 한도
+      // confirmations: 2, // 배포 확인 대기
+      timeoutBlocks: 200, // 배포 타임아웃
+      // skipDryRun: true, // Dry run 스킵
+    },
+
+    zkevmpolygon: {
+      provider: () =>
+        new HDWalletProvider(
+          [
+            "0x1d7f73d33f433eec6b05a259aba8db1b94cf72919ace86c5c32cd622df566c2a",
+          ], // 환경 변수에서 개인 키 가져오기
+          "https://polygonzkevm-cardona.g.alchemy.com/v2/K2rwCMG8VK29ZGlnU7WPN3qczr0MmBVW",
+          0 // by alchemy
+        ),
+      network_id: 2442, //
       // gas: 5500000, // 최대 가스 한도
       // confirmations: 2, // 배포 확인 대기
       timeoutBlocks: 200, // 배포 타임아웃

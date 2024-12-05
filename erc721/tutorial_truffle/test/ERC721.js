@@ -1,4 +1,4 @@
-const ERC721 = artifacts.require("ERC721Contract");
+const ERC721 = artifacts.require("MyToken");
 const BN = web3.utils.BN;
 
 contract("ERC721Contract", (accounts) => {
