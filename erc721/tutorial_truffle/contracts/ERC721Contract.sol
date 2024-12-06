@@ -15,7 +15,12 @@ contract MyToken is ERC721, ERC721Enumerable, ERC721URIStorage, ERC721Pausable, 
     constructor(address initialOwner)
         ERC721("MyToken", "MTK")
         Ownable(initialOwner)
-    {}
+    {
+        transferOwnership(initialOwner);
+        _safeMint(initialOwner, 0);
+        _setTokenURI(0, "https://teal-working-trout-758.mypinata.cloud/ipfs/bafybeidqzou3yepjpotpeojtejasgv7w2jnngzwynngkr77lz5f2m5dvzu/1.png");
+
+    }
 
     function pause() public onlyOwner {
         _pause();
