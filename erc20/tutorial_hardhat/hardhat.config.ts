@@ -18,11 +18,11 @@ const config: HardhatUserConfig = {
       accounts: [process.env.PRIVATE_KEY!, process.env.TEST_PRIVATE_KEY!],
     },
   },
-  solidity: "0.8.27",
-  gasReporter: {
-    enabled: true,
-    // currency: "KRW",
-  },
+  solidity: "0.8.22",
+  // gasReporter: {
+  //   enabled: true,
+  //   // currency: "KRW",
+  // },
 };
 
 export default config;
