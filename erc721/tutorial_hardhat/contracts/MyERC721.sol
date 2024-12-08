@@ -13,10 +13,11 @@ contract MyERC721 is ERC721, ERC721Enumerable, ERC721URIStorage, ERC721Pausable,
     uint256 private _nextTokenId;
 
     constructor(address initialOwner)
-        ERC721("MyToken", "MTK")
+        ERC721("MyNFT", "MTK")
         Ownable(initialOwner)
     {
         transferOwnership(initialOwner);
+        _nextTokenId = 1; 
         _safeMint(initialOwner, 0);
         _setTokenURI(0, "https://teal-working-trout-758.mypinata.cloud/ipfs/bafybeidqzou3yepjpotpeojtejasgv7w2jnngzwynngkr77lz5f2m5dvzu/1.png");
 
