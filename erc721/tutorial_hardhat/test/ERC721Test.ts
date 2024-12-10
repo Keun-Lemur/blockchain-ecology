@@ -75,17 +75,29 @@ describe("Start Example ERC721 test", () => {
       expect(await exampleERC721.getApproved("1")).to.equal(addr2.address);
     });
   });
-});
 
-//   describe("Test TransferFrom ExampleERC721", async () => {
-//     it("Example ERC721 Contract should have erc721 token after TransferFrom", async () => {
-//       expect(
-//         await exampleERC721
-//           .connect(addr2)
-//           .transferFrom(addr1.address, owner.address, "1")
-//       )
-//         .to.emit(exampleERC721, "Transfer")
-//         .withArgs(addr1.address, owner.address, "1");
-//       expect(await exampleERC721.ownerOf(1)).to.equal(owner.address);
-//     });
-//   });
+  describe("Test TransferFrom ExampleERC721", async () => {
+    beforeEach(async () => {
+      await exampleERC721.connect(owner).safeMint(addr1.address, tokenURI);
+
+      // addr1이 addr2에게 tokenId 1의 전송 권한 부여.
+      await exampleERC721.connect(addr1).approve(addr2.address, 1);
+
+      // 발행된 토큰 소유자 확인.
+      expect(await exampleERC721.ownerOf(1)).to.equal(addr1.address);
+      // 승인이 되었는지 확인.
+      expect(await exampleERC721.getApproved(1)).to.equal(addr2.address);
+    });
+
+    it("Example ERC721 Contract should have erc721 token after TransferFrom", async () => {
+      expect(
+        await exampleERC721
+          .connect(addr2)
+          .transferFrom(addr1.address, owner.address, "1")
+      )
+        .to.emit(exampleERC721, "Transfer")
+        .withArgs(addr1.address, owner.address, "1");
+      expect(await exampleERC721.ownerOf(1)).to.equal(owner.address);
+    });
+  });
+});
