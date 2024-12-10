@@ -1,0 +1,39 @@
+{
+  "name": "Keun Collection #5",
+  "description": "Keun's ERC721 practice",
+  "image": "https://teal-working-trout-758.mypinata.cloud/ipfs/bafybeidqzou3yepjpotpeojtejasgv7w2jnngzwynngkr77lz5f2m5dvzu/5.png",
+  "dna": "7a30586659fb2b09112dea97a4b3f5b5a9fa053a",
+  "edition": 5,
+  "date": 1733362101755,
+  "attributes": [
+    {
+      "trait_type": "Background",
+      "value": "Black"
+    },
+    {
+      "trait_type": "Eyeball",
+      "value": "Red"
+    },
+    {
+      "trait_type": "Eye color",
+      "value": "Yellow"
+    },
+    {
+      "trait_type": "Iris",
+      "value": "Small"
+    },
+    {
+      "trait_type": "Shine",
+      "value": "Shapes"
+    },
+    {
+      "trait_type": "Bottom lid",
+      "value": "High"
+    },
+    {
+      "trait_type": "Top lid",
+      "value": "High"
+    }
+  ],
+  "compiler": "HashLips Art Engine"
+}
