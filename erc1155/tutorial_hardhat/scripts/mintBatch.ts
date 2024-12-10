@@ -24,7 +24,7 @@ async function mint(to: string, id: Array<number>, amount: Array<number>) {
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.
-const ids = [0, 1, 2];
+const ids = [1, 2, 3];
 const amounts = [10, 11, 12];
 mint(process.env.PUBLIC_KEY!, ids, amounts).catch((error) => {
   console.error(error);
