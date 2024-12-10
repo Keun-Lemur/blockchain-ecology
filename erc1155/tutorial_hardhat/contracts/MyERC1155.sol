@@ -7,13 +7,22 @@ import {ERC1155Burnable} from "@openzeppelin/contracts/token/ERC1155/extensions/
 import {ERC1155Pausable} from "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Pausable.sol";
 import {ERC1155Supply} from "@openzeppelin/contracts/token/ERC1155/extensions/ERC1155Supply.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
+import {Strings} from "@openzeppelin/contracts/utils/Strings.sol"; // 추가된 임포트
 
 contract MyERC1155 is ERC1155, Ownable, ERC1155Pausable, ERC1155Burnable, ERC1155Supply {
-    constructor(address initialOwner) ERC1155("") Ownable(initialOwner) {}
+    constructor(address initialOwner) ERC1155("https://teal-working-trout-758.mypinata.cloud/ipfs/bafybeidqzou3yepjpotpeojtejasgv7w2jnngzwynngkr77lz5f2m5dvzu/") Ownable(initialOwner) {
+        
+    }
 
     function setURI(string memory newuri) public onlyOwner {
         _setURI(newuri);
     }
+
+    function uri(uint256 id) public view override returns (string memory) {
+    string memory baseUri = super.uri(id);  // baseUri 확인
+    return string(abi.encodePacked(baseUri, Strings.toString(id), ".png"));
+    }
+
 
     function pause() public onlyOwner {
         _pause();
